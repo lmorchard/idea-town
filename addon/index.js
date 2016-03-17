@@ -140,11 +140,6 @@ function setupApp() {
   });
 }
 
-// update the our icon for devtools themes
-Prefs.observe('devtools.theme', pref => {
-  setToggleButton(pref === 'dark');
-});
-
 const panel = Panel({ // eslint-disable-line new-cap
   contentURL: './feedback.html',
   contentScriptFile: './panel.js',
@@ -194,6 +189,10 @@ function getExperimentList(availableExperiments, installedAddons) {
   });
 }
 
+// update the our icon for devtools themes
+Prefs.observe('devtools.theme', pref => {
+  setToggleButton(pref === 'dark');
+});
 setToggleButton(Prefs.get('devtools.theme') === 'dark');
 
 function setToggleButton(dark) {

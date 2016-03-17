@@ -25,6 +25,7 @@ function authRequest(config, cb) {
 }
 
 function sendMetric(config, title, data, addon) {
+  console.debug('sendMetric', config, title, data, addon);
   authRequest(config, function(headers) {
     request({
       url: config.BASE_URL + '/api/metrics/?format=json',
