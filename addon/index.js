@@ -524,6 +524,15 @@ exports.main = function() {
 };
 
 exports.onUnload = function(reason) {
+  if (reason === 'uninstall') {
+    if (store.installedAddons) {
+      Object.keys(store.installedAddons).forEach(id => {
+        uninstallExperiment({addon_id: id});
+      });
+      delete store.installedAddons;
+    }
+    delete store.availableExperiments;
+  }
   AddonManager.removeAddonListener(addonListener);
   AddonManager.removeInstallListener(installListener);
   panel.destroy();
@@ -532,14 +541,4 @@ exports.onUnload = function(reason) {
   survey.destroy();
   setInstalledFlagPageMod.destroy();
   messageBridgePageMod.destroy();
-  if (reason === 'uninstall') {
-    app.send('addon-self:uninstalled');
-    if (store.installedAddons) {
-      for (let id of store.installedAddons) { // eslint-disable-line prefer-const
-        uninstallExperiment({addon_id: id});
-      }
-      delete store.installedAddons;
-    }
-    delete store.availableExperiments;
-  }
 };
