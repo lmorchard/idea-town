@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'testpilot.base',
     'testpilot.frontend',
     'testpilot.users',
+    'testpilot.metrics',
     'testpilot.experiments',
 
     # Third party apps
