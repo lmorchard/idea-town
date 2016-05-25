@@ -1,26 +1,20 @@
+/* eslint-disable no-unused-vars */
 import app from 'ampersand-app';
-import ExperimentListView from './experiment-list-view';
-import PageView from './page-view';
+import ReactPageView from './react-page-view';
+import React from 'react';
 
-import template from '../templates/experiment-list-page';
+import ExperimentListPage from '../components/ExperimentListPage';
 
-export default PageView.extend({
+export default ReactPageView.extend({
   pageTitle: 'Firefox Test Pilot',
   pageTitleL10nID: 'pageTitleExperimentListPage',
-  template: template,
-
   render() {
     this.loggedIn = !!app.me.user.id;
-    PageView.prototype.render.apply(this, arguments);
-    this.renderSubview(new ExperimentListView({loggedIn: this.loggedIn}),
-      '[data-hook="experiment-list"]');
-
-    app.sendToGA('pageview', {
-      'dimension1': this.loggedIn
-    });
+    app.sendToGA('pageview', {'dimension1': this.loggedIn});
+    ReactPageView.prototype.render.apply(this, arguments);
   },
-
-  remove() {
-    PageView.prototype.remove.apply(this, arguments);
+  renderReact() {
+    return <ExperimentListPage model={app.experiments}
+                               loggedIn={this.loggedIn} />;
   }
 });
