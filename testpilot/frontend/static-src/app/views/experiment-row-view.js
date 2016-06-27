@@ -28,6 +28,13 @@ export default BaseView.extend({
       hook: 'title',
       type: function shortTitleWithFallback(el, model) {
         el.innerHTML = model.short_title || model.title;
+        el.setAttribute('data-l10n-id', model.buildL10nFieldID('title'));
+      }
+    },
+    {
+      hook: 'description',
+      type: function setDescriptionL10nID(el, model) {
+        el.setAttribute('data-l10n-id', model.buildL10nFieldID('description'));
       }
     },
     {

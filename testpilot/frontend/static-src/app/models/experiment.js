@@ -27,6 +27,11 @@ export default Model.extend({
         this.enabled = false;
       }
     });
+    console.log('init', this, this.slug, this.title, Object.keys(this));
+  },
+
+  buildL10nFieldID(fieldName) {
+    return 'experiment_' + this.slug.replace('-', '_') + '_field_' + fieldName;
   },
 
   buildSurveyURL(ref) {
