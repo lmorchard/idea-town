@@ -379,6 +379,7 @@ gulp.task('rev-assets', function() {
       '.html'
     ],
     dontUpdateReference: [
+      /static\/addon\/*/,
       /.*\.json/,
       'favicon.ico'
     ]
@@ -440,6 +441,7 @@ gulp.task('connect', function connectTask() {
   connect.server({
     root: DIST_PATH,
     livereload: false,
+    host: '0.0.0.0',
     port: serverPort
   });
 });
@@ -455,7 +457,6 @@ gulp.task('server', function() {
 
 gulp.task('static-only-server', function() {
   return runSequence(
-    'static',
     'connect',
     'watch'
   );
