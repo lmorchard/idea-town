@@ -15,7 +15,7 @@ machine:
   node:
     version: 6.2.0
   environment:
-    TESTPILOT_STATIC_BRANCHES: development-static 1305-static-deploy
+    TESTPILOT_STATIC_BRANCHES: development-static 1307-react-time-omg
 
 dependencies:
 
@@ -75,7 +75,7 @@ deployment:
 
   static_development_lorchard:
     branch:
-      - 1305-static-deploy
+      - 1307-react-time-omg
     commands:
       - aws s3 sync dist s3://testpilot-static.lorchard.mozaws.net --delete --acl public-read
 
