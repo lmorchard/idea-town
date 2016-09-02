@@ -4,6 +4,7 @@ const config = require('../config.js');
 const connect = require('gulp-connect');
 const runSequence = require('run-sequence');
 const RevAll = require('gulp-rev-all');
+const merge = require('merge-stream');
 
 gulp.task('dist-rev-assets', function() {
   const revAll = new RevAll({
@@ -28,6 +29,13 @@ gulp.task('dist-rev-assets', function() {
 gulp.task('dist-build', () => runSequence(
   'build',
   'dist-rev-assets'
+));
+
+gulp.task('dist-django-build', ['dist-build'], () => merge(
+  gulp.src(config.DIST_PATH + 'static/**/*')
+    .pipe(gulp.dest(config.DJANGO_DIST_PATH)),
+  gulp.src(config.DIST_PATH + 'api/**/*')
+    .pipe(gulp.dest(config.DJANGO_DIST_PATH + 'api'))
 ));
 
 gulp.task('dist-watch', ['watch'], () => {
