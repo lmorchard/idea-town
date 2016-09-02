@@ -9,7 +9,7 @@ gulp.task('images-build', () => {
     // imagemin skips files https://github.com/sindresorhus/gulp-imagemin/issues/183
     // files have been optimized and rechecked into the repo
     // .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
-    .pipe(gulp.dest(config.DEST_PATH + 'images'));
+    .pipe(gulp.dest(config.DEST_PATH + 'static/images'));
 });
 
 gulp.task('images-watch', () => {

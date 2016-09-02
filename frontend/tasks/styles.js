@@ -34,7 +34,7 @@ gulp.task('styles-build', ['styles-lint', 'styles-clean'], () => {
       // don't minify in development
       .pipe(gulpif(!config.IS_DEBUG, minifycss()))
       .pipe(gulpif(config.IS_DEBUG, sourcemaps.write('.')))
-    .pipe(gulp.dest(config.DEST_PATH + 'styles'));
+    .pipe(gulp.dest(config.DEST_PATH + 'static/styles'));
 });
 
 gulp.task('styles-watch', () => {

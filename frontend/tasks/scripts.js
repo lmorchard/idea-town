@@ -57,7 +57,7 @@ gulp.task('scripts-misc', shouldLint('js-lint', 'scripts-lint'), () => {
     .pipe(gulpif(config.IS_DEBUG, sourcemaps.init({loadMaps: true})))
     .pipe(gulpif(!config.IS_DEBUG, uglify()))
     .pipe(gulpif(config.IS_DEBUG, sourcemaps.write('./')))
-    .pipe(gulp.dest(config.DEST_PATH + 'scripts'));
+    .pipe(gulp.dest(config.DEST_PATH + 'static/scripts'));
 });
 
 gulp.task('scripts-app-main', () => {
@@ -85,5 +85,5 @@ function commonBrowserify(sourceName, b) {
     .pipe(gulpif(!config.IS_DEBUG, uglify()))
     .on('error', gutil.log)
     .pipe(gulpif(config.IS_DEBUG, sourcemaps.write('./')))
-    .pipe(gulp.dest(config.DEST_PATH + 'app/'));
+    .pipe(gulp.dest(config.DEST_PATH + 'static/app/'));
 }
