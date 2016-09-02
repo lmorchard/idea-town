@@ -14,6 +14,7 @@ require('./tasks/styles');
 require('./tasks/images');
 require('./tasks/assets');
 require('./tasks/pages');
+require('./tasks/dist');
 require('./tasks/server');
 
 // Exit if the gulpfile changes so we can self-reload with a wrapper script.
