@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ " $TESTPILOT_STATIC_BRANCHES " =~ " $CIRCLE_BRANCH " ]]; then
-    npm start &
+    npm run server &
     STATIC_SERVER_PID=$!
 else
     # Fire up an instance of the site configured for integration testing

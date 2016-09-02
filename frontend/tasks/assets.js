@@ -7,7 +7,7 @@ gulp.task('assets-locales', function localesTask() {
 });
 
 gulp.task('assets-addon', function localesTask() {
-  return gulp.src(config.SRC_PATH + 'addon/**/*')
+  return gulp.src(config.ADDON_SRC_PATH + '**/*')
     .pipe(gulp.dest(config.DEST_PATH + 'static/addon'));
 });
 
