@@ -19,6 +19,14 @@ gulp.task('content-experiments-json', function generateStaticAPITask() {
     .pipe(gulp.dest(config.DEST_PATH + 'api'));
 });
 
+gulp.task('import-api-content', (done) => {
+  fetch(config.PRODUCTION_EXPERIMENTS_URL)
+    .then(response => response.json())
+    .then(data => Promise.all(data.results.map(processImportedExperiment)))
+    .then(() => done())
+    .catch(done);
+});
+
 function buildExperimentsJSON() {
   const index = {results: []};
   const counts = {};
@@ -62,14 +70,6 @@ function buildExperimentsJSON() {
 
   return through.obj(collectEntry, endStream);
 }
-
-gulp.task('import-api-content', (done) => {
-  fetch(config.PRODUCTION_EXPERIMENTS_URL)
-    .then(response => response.json())
-    .then(data => Promise.all(data.results.map(processImportedExperiment)))
-    .then(() => done())
-    .catch(done);
-});
 
 function processImportedExperiment(experiment) {
   // Clean up auto-generated and unused model fields.

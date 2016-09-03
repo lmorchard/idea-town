@@ -85,12 +85,12 @@
     "url": "git+https://github.com/mozilla/testpilot.git"
   },
   "scripts": {
-    "start": "gulp --gulpfile frontend/gulpfile.js",
-    "server": "gulp --gulpfile frontend/gulpfile.js server",
-    "static": "gulp --gulpfile frontend/gulpfile.js dist-build",
-    "build": "gulp build",
+    "start": "gulp",
+    "server": "gulp server",
+    "static": "gulp dist-build",
+    "build": "gulp dist-django-build",
     "docs": "doctoc README.md && doctoc addon/README.md",
-    "lint": "gulp lint sass-lint",
+    "lint": "gulp scripts-lint styles-lint",
     "test": "npm run test:general && npm run test:client",
     "test:general": "tape testpilot/frontend/static-src/test/general.js | faucet",
     "test:client": "browserify -t babelify testpilot/frontend/static-src/test/**/*.js | testling | faucet",

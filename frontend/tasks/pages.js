@@ -28,7 +28,7 @@ gulp.task('pages-generate', function() {
 const legalTemplates = require('../../legal-copy/legal-templates');
 
 gulp.task('pages-legal', () => {
-  return gulp.src('../legal-copy/*.md')
+  return gulp.src('./legal-copy/*.md')
              .pipe(convertToLegalPage())
              .pipe(gulp.dest(config.DEST_PATH));
 });
@@ -55,5 +55,5 @@ gulp.task('pages-build', ['pages-generate', 'pages-legal']);
 
 gulp.task('pages-watch', () => {
   gulp.watch(config.SRC_PATH + 'index.html', ['pages-generate']);
-  gulp.watch(['../legal-copy/*.md', '../legal-copy/*.js'], ['pages-legal']);
+  gulp.watch(['./legal-copy/*.md', './legal-copy/*.js'], ['pages-legal']);
 });

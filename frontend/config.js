@@ -3,14 +3,13 @@ module.exports = {
   IS_DEBUG: (process.env.NODE_ENV === 'development'),
 
   // TODO: Move addon build to a better path
-  ADDON_SRC_PATH: '../testpilot/frontend/static-src/addon/',
+  ADDON_SRC_PATH: './testpilot/frontend/static-src/addon/',
 
-  SRC_PATH: './src/',
-  DEST_PATH: './build/',
-  STAGE_PATH: './stage/',
-  DIST_PATH: '../dist/',
-  DJANGO_DIST_PATH: '../testpilot/frontend/static/',
-  CONTENT_SRC_PATH: '../content-src/',
+  SRC_PATH: './frontend/src/',
+  DEST_PATH: './frontend/build/',
+  DIST_PATH: './dist/',
+  DJANGO_DIST_PATH: './testpilot/frontend/static/',
+  CONTENT_SRC_PATH: './content-src/',
 
   PRODUCTION_EXPERIMENTS_URL: 'https://testpilot.firefox.com/api/experiments',
   IMAGE_NEW_BASE_PATH: 'images/experiments/',
