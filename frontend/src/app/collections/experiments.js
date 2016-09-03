@@ -7,8 +7,7 @@ export default Collection.extend({
   model: Experiment,
   indexes: ['slug'],
   url: '/api/experiments.json',
-  // usageCountsUrl: '/api/experiments/usage_counts.json',
-  usageCountsUrl: 'https://analysis-output.telemetry.mozilla.org/testpilot/data/installation-counts/latest.json',
+  usageCountsUrl: '/api/experiments/usage_counts.json',
   comparator: 'order',
 
   // Ampersand.sync doesn't seem to pass correct Accept headers by default.
