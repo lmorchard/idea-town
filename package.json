@@ -92,10 +92,10 @@
     "docs": "doctoc README.md && doctoc addon/README.md",
     "lint": "gulp scripts-lint styles-lint",
     "test": "npm run test:general && npm run test:client",
-    "test:general": "tape testpilot/frontend/static-src/test/general.js | faucet",
-    "test:client": "browserify -t babelify testpilot/frontend/static-src/test/**/*.js | testling | faucet",
-    "test:browser": "budo testpilot/frontend/static-src/test/browser.js:bundle.js --verbose -- -t babelify -t require-globify",
-    "test:browser:live": "budo testpilot/frontend/static-src/test/browser.js:bundle.js --verbose --live -- -t babelify -t require-globify",
-    "test:cov": "browserify -t babelify -t coverify testpilot/frontend/static-src/test/**/*.js | node | coverify"
+    "test:general": "tape frontend/src/test/general.js | faucet",
+    "test:client": "browserify -t babelify frontend/src/test/**/*.js | testling | faucet",
+    "test:browser": "budo frontend/src/test/browser.js:bundle.js --verbose -- -t babelify -t require-globify",
+    "test:browser:live": "budo frontend/src/test/browser.js:bundle.js --verbose --live -- -t babelify -t require-globify",
+    "test:cov": "browserify -t babelify -t coverify frontend/src/test/**/*.js | node | coverify"
   }
 }
