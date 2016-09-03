@@ -3,7 +3,7 @@ module.exports = {
   IS_DEBUG: (process.env.NODE_ENV === 'development'),
 
   // TODO: Move addon build to a better path
-  ADDON_SRC_PATH: './testpilot/frontend/static-src/addon/',
+  ADDON_SRC_PATH: './addon/',
 
   SRC_PATH: './frontend/src/',
   DEST_PATH: './frontend/build/',

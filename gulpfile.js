@@ -17,21 +17,9 @@ require('./frontend/tasks/pages');
 require('./frontend/tasks/server');
 require('./frontend/tasks/dist');
 
-// Exit if the gulpfile changes so we can self-reload with a wrapper script.
-gulp.task('self-watch', () => gulp.watch([
-  './gulpfile.js',
-  './frontend/config.js',
-  './debug-config.json',
-  './frontend/tasks/*.js'
-], () => process.exit()));
-
-gulp.task('self-lint', () => gulp.src('gulpfile.js')
-  .pipe(eslint())
-  .pipe(eslint.format())
-  .pipe(eslint.failOnError()));
-
 gulp.task('clean', () => del([
-  config.DEST_PATH
+  config.DEST_PATH,
+  config.DIST_PATH
 ]));
 
 gulp.task('build', [
@@ -60,3 +48,16 @@ gulp.task('default', () => runSequence(
   'watch',
   'server'
 ));
+
+// Exit if the gulpfile changes so we can self-reload with a wrapper script.
+gulp.task('self-watch', () => gulp.watch([
+  './gulpfile.js',
+  './frontend/config.js',
+  './debug-config.json',
+  './frontend/tasks/*.js'
+], () => process.exit()));
+
+gulp.task('self-lint', () => gulp.src('gulpfile.js')
+  .pipe(eslint())
+  .pipe(eslint.format())
+  .pipe(eslint.failOnError()));
