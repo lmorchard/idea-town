@@ -8,21 +8,17 @@
 #  * disabling these now lets us land greenkeeper and update a lot of out of
 #    date libraries (~25)
 #  * r=_6a68 and r=clouserw.  Conveniently discussed over the holiday break ;)
-exit 0
 
 npm start &
 STATIC_SERVER_PID=$!
 
 # Wait until the server is available...
-until $(curl --output /dev/null --silent --head --fail http://testpilot.dev:8000); do
+until $(curl --output /dev/null --silent --head --fail -k https://example.com:8000); do
     printf '.'; sleep 1
 done
 
 # Fire up the integration tests with Marionette
-python integration/runtests.py \
-    --binary=$HOME/firefox/firefox-bin \
-    --verbose \
-    integration/test_installation.py
+tox
 TEST_STATUS=$?
 
 kill $STATIC_SERVER_PID
