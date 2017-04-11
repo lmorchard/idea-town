@@ -18,7 +18,7 @@ until $(curl --output /dev/null --silent --head --fail -k https://example.com:80
 done
 
 # Fire up the integration tests with Marionette
-tox
+tox --firefox-path=firefox/firefox
 TEST_STATUS=$?
 
 kill $STATIC_SERVER_PID
