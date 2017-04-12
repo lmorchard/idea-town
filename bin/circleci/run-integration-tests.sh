@@ -18,7 +18,6 @@ until $(curl --output /dev/null --silent --head --fail -k https://example.com:80
 done
 
 # Fire up the integration tests with Marionette
-sleep 10
 tox
 TEST_STATUS=$?
 
