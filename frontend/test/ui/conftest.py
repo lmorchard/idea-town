@@ -20,6 +20,6 @@ def firefox_profile(firefox_profile):
     firefox_profile.set_preference(
         'extensions.install.requireBuiltInCerts', 'false')
     firefox_profile.set_preference('xpinstall.signatures.required', 'false')
-    firefox_profile.set_preference('extensions.webapi.testing', 'false')
-    firefox_profile.set_preference('testpilot.dev', 'local')
+    firefox_profile.set_preference('extensions.webapi.testing', 'true')
+    firefox_profile.set_preference('testpilot.env', 'local')
     return firefox_profile

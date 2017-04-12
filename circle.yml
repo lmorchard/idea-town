@@ -34,6 +34,8 @@ test:
     - gunzip -c geckodriver.tar.gz | tar xopf -
     - chmod +x geckodriver
     - sudo mv geckodriver /home/ubuntu/bin
+    - firefox/firefox --version
+    - geckodriver --version
   override:
     - ./bin/circleci/test-addon.sh
     - ./bin/circleci/test-frontend.sh
