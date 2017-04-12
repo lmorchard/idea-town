@@ -10,6 +10,8 @@ env:
   matrix:
     - TOXENV=ui-tests
 addons:
+  hosts:
+    - example.com
   firefox: latest
 before_install:
   - nvm install 6.9.1
