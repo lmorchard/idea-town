@@ -18,8 +18,10 @@ before_install:
   - firefox --version
   - geckodriver --version
 install:
-  pip install tox-travis
+  - npm install
+  - pip install tox-travis
 before_script:
+  - npm start &
   - sh -e /etc/init.d/xvfb start
   - sleep 10
 script:
