@@ -20,7 +20,7 @@ dependencies:
     # node_modules is included by default
 
   override:
-    - pip install tox mozdownload mozinstall
+    - pip install tox==1.8.1 mozdownload mozinstall
     - google-chrome --version
     - ./bin/circleci/install-node-dependencies.sh
     - ./bin/circleci/setup-test-dependencies.sh
