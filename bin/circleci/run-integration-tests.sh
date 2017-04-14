@@ -13,12 +13,11 @@ npm start &
 STATIC_SERVER_PID=$!
 
 # Wait until the server is available...
-until $(curl --output /dev/null --silent --head --fail -k https://example.com:6678); do
+until $(curl --output /dev/null --silent --head --fail -k https://example.com:8000); do
     printf '.'; sleep 1
 done
 
 # Fire up the integration tests with Marionette
-sleep 480
 tox
 TEST_STATUS=$?
 
