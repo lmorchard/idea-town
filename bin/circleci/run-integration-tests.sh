@@ -17,10 +17,8 @@ until $(curl --output /dev/null --silent --head --fail -k https://example.com:80
     printf '.'; sleep 1
 done
 
-echo "Server started"
-curl -k https://example.com:8000/
 # Fire up the integration tests with Marionette
-tox
+xvfb-run tox
 TEST_STATUS=$?
 
 kill $STATIC_SERVER_PID
