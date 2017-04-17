@@ -18,7 +18,8 @@ until $(curl --output /dev/null --silent --head --fail -k https://example.com:80
 done
 
 # Fire up the integration tests with Marionette
-xvfb-run tox
+xvfb start
+tox
 TEST_STATUS=$?
 
 kill $STATIC_SERVER_PID
