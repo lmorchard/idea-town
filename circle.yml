@@ -32,7 +32,8 @@ dependencies:
 
 test:
   pre:
-    - cd sc-*-linux && ./bin/sc --user $SAUCE_USERNAME --api-key $SAUCE_ACCESS_KEY
+    - cd sc-*-linux && ./bin/sc --user $SAUCE_USERNAME --api-key $SAUCE_ACCESS_KEY --readyfile ~/sauce_is_ready:
+        background: true
     - mozdownload --version latest --destination firefox.tar.bz2
     - mozinstall firefox.tar.bz2
     - wget -O geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v0.15.0/geckodriver-v0.15.0-linux64.tar.gz
@@ -41,6 +42,7 @@ test:
     - sudo mv geckodriver /home/ubuntu/bin
     - firefox/firefox --version
     - geckodriver --version
+    - while [ ! -e ~/sauce_is_ready ]; do sleep 1; done
   override:
     - ./bin/circleci/test-addon.sh
     - ./bin/circleci/test-frontend.sh
