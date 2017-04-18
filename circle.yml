@@ -41,6 +41,7 @@ test:
     - ./bin/circleci/test-frontend.sh
     - ./bin/circleci/run-integration-tests.sh
   post:
+    - killall --wait sc
     - bash <(curl -s https://codecov.io/bash)
 
 deployment:

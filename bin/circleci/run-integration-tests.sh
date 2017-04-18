@@ -12,13 +12,14 @@
 npm start &
 STATIC_SERVER_PID=$!
 
-# Wait until the server is available...
-until $(curl --output /dev/null --silent --head --fail -k https://example.com:8000/); do
-    printf '.'; sleep 1
-done
+cd sc-*-linux && ./bin/sc --user $SAUCE_USERNAME --api-key $SAUCE_ACCESS_KEY --readyfile ~/sauce_is_ready:
+  background: true
+# Wait for tunnel to be ready
+while [ ! -e ~/sauce_is_ready ]; do sleep 1; done
+# Wait for app to be ready
+wget --retry-connrefused --no-check-certificate -T 30 https://example.com:8000
 
 # Fire up the integration tests with Marionette
-xvfb start
 tox
 TEST_STATUS=$?
 
