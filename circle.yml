@@ -26,6 +26,10 @@ dependencies:
     - ./bin/circleci/setup-test-dependencies.sh
     - ./bin/circleci/build-addon.sh
 
+  post:
+    - wget https://d2nkw87yt5k0to.cloudfront.net/downloads/sc-latest-linux.tar.gz
+    - tar -xvf sc-latest-linux.tar.gz
+
 test:
   pre:
     - mozdownload --version latest --destination firefox.tar.bz2

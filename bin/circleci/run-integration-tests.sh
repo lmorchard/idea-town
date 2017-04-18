@@ -9,12 +9,13 @@
 #    date libraries (~25)
 #  * r=_6a68 and r=clouserw.  Conveniently discussed over the holiday break ;)
 
-npm start &
-STATIC_SERVER_PID=$!
-
 cd sc-*-linux && ./bin/sc --user $SAUCE_USERNAME --api-key $SAUCE_ACCESS_KEY --readyfile ~/sauce_is_ready:
   background: true
 # Wait for tunnel to be ready
+
+npm start &
+STATIC_SERVER_PID=$!
+
 while [ ! -e ~/sauce_is_ready ]; do sleep 1; done
 # Wait for app to be ready
 wget --retry-connrefused --no-check-certificate -T 30 https://example.com:8000
