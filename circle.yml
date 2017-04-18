@@ -42,6 +42,7 @@ test:
     - sudo mv geckodriver /home/ubuntu/bin
     - firefox/firefox --version
     - geckodriver --version
+    - while [ ! -e ~/sauce_is_ready ]; do sleep 1; done
   override:
     - ./bin/circleci/test-addon.sh
     - ./bin/circleci/test-frontend.sh
