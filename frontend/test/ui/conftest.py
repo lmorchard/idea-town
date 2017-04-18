@@ -12,6 +12,8 @@ def foxpuppet(selenium):
 def capabilities(capabilities):
     capabilities['marionette'] = True
     capabilities['acceptInsecureCerts'] = True
+    capabilities['platform'] = 'Windows 10'
+    capabilities['version'] = 'dev'
     return capabilities
 
 
