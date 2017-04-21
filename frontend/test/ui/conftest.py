@@ -8,7 +8,7 @@ def foxpuppet(selenium):
     return FoxPuppet(selenium)
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture
 def capabilities(capabilities):
     capabilities['marionette'] = True
     capabilities['acceptInsecureCerts'] = True
