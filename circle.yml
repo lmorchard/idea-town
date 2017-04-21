@@ -30,12 +30,13 @@ dependencies:
 test:
   pre:
     - firefox --version
-    - sudo apt-get update && sudo apt-get install libpango1.0-0 && sudo apt-get install firefox
+    - mozdownload --version latest --destination firefox.tar.bz2
+    - mozinstall firefox.tar.bz2
     - wget -O geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v0.16.0/geckodriver-v0.16.0-linux64.tar.gz
     - gunzip -c geckodriver.tar.gz | tar xopf -
     - chmod +x geckodriver
     - sudo mv geckodriver /home/ubuntu/bin
-    - firefox --version
+    - firefox/firefox --version
     - geckodriver --version
   override:
     - ./bin/circleci/test-addon.sh
