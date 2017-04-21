@@ -43,6 +43,7 @@ test:
     - ./bin/circleci/run-integration-tests.sh
   post:
     - bash <(curl -s https://codecov.io/bash)
+    - cp geckodriver.log $CIRCLE_ARTIFACTS
 
 deployment:
 
