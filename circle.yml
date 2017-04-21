@@ -6,7 +6,6 @@
 machine:
   environment:
     DISPLAY: :99
-    USE_HTTPS: 1
   hosts:
     example.com: 127.0.0.1
   node:
