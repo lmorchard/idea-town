@@ -16,10 +16,10 @@ def capabilities(capabilities):
 
 
 @pytest.fixture
-def firefox_profile(firefox_profile):
-    firefox_profile.set_preference(
-        'extensions.install.requireBuiltInCerts', 'false')
-    firefox_profile.set_preference('xpinstall.signatures.required', 'false')
-    firefox_profile.set_preference('extensions.webapi.testing', 'true')
-    firefox_profile.set_preference('testpilot.env', 'local')
-    return firefox_profile
+def firefox_options(firefox_options):
+    firefox_options.set_preference(
+        'extensions.install.requireBuiltInCerts', False)
+    firefox_options.set_preference('xpinstall.signatures.required', False)
+    firefox_options.set_preference('extensions.webapi.testing', True)
+    firefox_options.set_preference('example.com', 'local')
+    return firefox_options
