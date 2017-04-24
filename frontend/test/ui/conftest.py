@@ -11,6 +11,7 @@ def foxpuppet(selenium):
 @pytest.fixture
 def capabilities(capabilities):
     capabilities['marionette'] = True
+    capabilities['acceptInsecureCerts'] = True
     return capabilities
 
 
