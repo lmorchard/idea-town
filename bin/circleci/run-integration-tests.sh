@@ -18,7 +18,9 @@ until $(curl --output /dev/null --silent --head --fail http://example.com:8000);
 done
 
 # Fire up the integration tests with Marionette
+curl http://example.com:8000
 sleep 10
+curl http://example.com:8000
 tox
 TEST_STATUS=$?
 
