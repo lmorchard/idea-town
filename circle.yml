@@ -6,6 +6,7 @@
 machine:
   environment:
     DISPLAY: :99
+    USE_HTTPS: 0
   hosts:
     example.com: 127.0.0.1
   node:
@@ -44,6 +45,7 @@ test:
   post:
     - bash <(curl -s https://codecov.io/bash)
     - cp geckodriver.log $CIRCLE_ARTIFACTS
+    - cp results.html $CIRCLE_ARTIFACTS
 
 deployment:
 
