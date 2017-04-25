@@ -37,6 +37,7 @@ test:
     - sudo mv geckodriver /home/ubuntu/bin
     - firefox/firefox --version
     - geckodriver --version
+    - ./bin/circleci/run-curl.sh
   override:
     - ./bin/circleci/test-addon.sh
     - ./bin/circleci/test-frontend.sh
