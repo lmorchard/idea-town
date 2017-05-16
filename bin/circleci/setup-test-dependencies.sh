@@ -1,13 +1,14 @@
 #!/bin/bash
 set -ex
 
-# TODO: Update this occasionally from here:
-# https://wiki.mozilla.org/Add-ons/Extension_Signing#Unbranded_Builds
-FIREFOX_URL=http://archive.mozilla.org/pub/firefox/tinderbox-builds/mozilla-release-linux64-add-on-devel/1470649852/firefox-48.0.1.en-US.linux-x86_64-add-on-devel.tar.bz2
+pip install tox mozdownload mozinstall
 
-wget -qO $HOME/fx-release.tar.bz2 $FIREFOX_URL
-tar -C $HOME -jxf $HOME/fx-release.tar.bz2
-$HOME/firefox/firefox-bin --version
+mozdownload --version latest --destination firefox.tar.bz2
+mozinstall firefox.tar.bz2
+wget -O geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v0.16.1/geckodriver-v0.16.1-linux64.tar.gz
+gunzip -c geckodriver.tar.gz | tar xopf -
+chmod +x geckodriver
+sudo mv geckodriver /home/ubuntu/bin
 
-cd integration
-pip install -r requirements.txt
+firefox/firefox --version
+geckodriver --version
