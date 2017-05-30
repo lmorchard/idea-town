@@ -10,23 +10,27 @@ const YAML = require('yamljs');
 
 const util = require('./util');
 
-gulp.task('content-build', ['content-experiments-data']);
+const NEWS_UPDATES_YAML = config.CONTENT_SRC_PATH + 'news_updates.yaml'
 
-gulp.task('content-watch', () => {
-  gulp.watch(config.CONTENT_SRC_PATH + '/**/*.yaml', ['content-experiments-data']);
-});
+gulp.task('content-build', [ 'content-experiments-data' ]);
 
-gulp.task('content-experiments-data', function generateStaticAPITask() {
-  return gulp.src(config.CONTENT_SRC_PATH + 'experiments/*.yaml')
+gulp.task('content-watch', () =>
+  gulp.watch(config.CONTENT_SRC_PATH + '/**/*.yaml', [ 'content-experiments-data' ]));
+
+gulp.task('content-experiments-data', () =>
+  gulp.src(config.CONTENT_SRC_PATH + 'experiments/*.yaml')
     .pipe(buildExperimentsData())
-    .pipe(gulp.dest(config.DEST_PATH));
-});
+    .pipe(gulp.dest(config.DEST_PATH)));
 
 function buildExperimentsData() {
   const index = {results: []};
   const strings = [];
   const counts = {};
   const cssStrings = [];
+
+  // Prime the set of news updates from general items
+  const newsUpdatesData = fs.readFileSync(NEWS_UPDATES_YAML).toString('utf-8');
+  let newsUpdates = YAML.parse(newsUpdatesData)
 
   function findLocalizableStrings(obj, pieces = [], experiment = null) {
     if (!experiment) {
@@ -64,6 +68,15 @@ function buildExperimentsData() {
       return cb();
     }
 
+    // Extract news updates from experiment, annotate each update with slug.
+    if (experiment.news_updates) {
+      const { news_updates, slug } = experiment;
+      newsUpdates = newsUpdates.concat(news_updates.map(update => ({
+        ...update, experimentSlug: slug
+      })));
+      delete experiment.news_updates;
+    }
+
     cssStrings.push(`
 .experiment-icon-wrapper-${experiment.slug} {
   background-color: ${experiment.gradient_start};
@@ -98,9 +111,27 @@ function buildExperimentsData() {
     cb();
   }
 
+  function extractNewsUpdateStrings() {
+    // Extract FTL strings for news updates
+    const newsUpdateL10nFields = ['title', 'content'];
+    newsUpdates.forEach(update => {
+      newsUpdateL10nFields.forEach(fieldName => {
+        strings.push({
+          key: util.newsUpdateL10nId(update, fieldName),
+          value: update[fieldName]
+        });
+      });
+    });
+  }
+
   function endStream(cb) {
+    // One last sweep through updates to exclude dev content where not wanted
+    newsUpdates = newsUpdates
+      .filter(update => config.ENABLE_DEV_CONTENT || !update.dev);
+    extractNewsUpdateStrings();
+
     this.push(new gutil.File({
-      path: 'static/locales/en-US/experiments.ftl',
+      path: '../../locales/en-US/experiments.ftl',
       contents: new Buffer(generateFTL())
     }));
     // These files are being consumed by 3rd parties (at a minimum, the Mozilla
@@ -117,6 +148,10 @@ function buildExperimentsData() {
     this.push(new gutil.File({
       path: 'static/styles/experiments.css',
       contents: new Buffer(cssStrings.join('\n'))
+    }));
+    this.push(new gutil.File({
+      path: 'api/news_updates.json',
+      contents: new Buffer(JSON.stringify(newsUpdates, null, 2))
     }));
     cb();
   }

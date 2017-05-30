@@ -1,17 +1,26 @@
 .update-list {
   margin-bottom: 60px;
+  width: 100%;
 }
 
 .update {
   align-items: center;
   background: $dark-over-darkest-blue;
   border-radius: 6px;
+  cursor: default;
   display: flex;
   margin: 10px 0;
   padding: 5px;
+  width: 100%;
 
-  &:hover {
-    background: $dark-over-darkest-blue-highlight;
+  .update-content {
+    flex-grow: 1;
+  }
+
+  .news-update-test-pilot-icon {
+    background-image: url('../images/copter.png');
+    background-repeat: no-repeat;
+    background-size: 80px 64px;
   }
 
   > div {
@@ -26,6 +35,32 @@
   h4 {
     margin: 5px 0;
   }
+
+  .link-chevron {
+    .chevron {
+      background: transparent;
+      display: block;
+      height: 35px;
+      width: 35px;
+    }
+  }
+
+  &.has-link {
+    cursor: pointer;
+
+    &:hover {
+      background: $dark-over-darkest-blue-highlight;
+    }
+
+    .link-chevron {
+      .chevron {
+        background-image: url('../images/news-link-chevron.png');
+        background-repeat: no-repeat;
+        background-size: 21px 35px;
+      }
+    }
+  }
+
 }
 
 .up-date {
