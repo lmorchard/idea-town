@@ -7,6 +7,7 @@ import classnames from 'classnames';
 
 import Banner from '../components/Banner';
 import Copter from '../components/Copter';
+import UpdateList from '../components/UpdateList';
 import EmailDialog from '../components/EmailDialog';
 import ExperimentCardList from '../components/ExperimentCardList';
 import LayoutWrapper from '../components/LayoutWrapper';
@@ -100,7 +101,7 @@ export default class HomePageWithAddon extends React.Component {
   }
 
   render() {
-    const { experiments, isAfterCompletedDate } = this.props;
+    const { experiments, isAfterCompletedDate, newsUpdates } = this.props;
 
     if (experiments.length === 0) { return null; }
 
@@ -115,7 +116,9 @@ export default class HomePageWithAddon extends React.Component {
             onDismiss={() => this.setState({ showEmailDialog: false })} />}
 
         {this.renderSplash()}
+
         <LayoutWrapper flexModifier="card-list">
+          <UpdateList {...{ newsUpdates, experiments }} />
           <ExperimentCardList {...this.props} experiments={currentExperiments} eventCategory="HomePage Interactions" />
           <PastExperiments {...this.props} pastExperiments={ pastExperiments } />
         </LayoutWrapper>

@@ -1,0 +1,28 @@
+# News updates for Test Pilot in general expressed as a YAML list
+# -
+#   slug: general-update-1
+#   title: Example title
+#   link: https://blog.mozilla.org/testpilot/example
+#   created: 2017-06-01T12:00:00Z
+#   published: 2017-06-02T12:00:00Z
+#   dev: false
+#   content: >
+#     Example content with *Markdown* goes here
+-
+  slug: general-update-alpha
+  title: Example dev news update #1
+  created: 2017-06-01T12:00:00Z
+  published: 2017-06-01T11:00:00Z
+  dev: true
+  link: https://mozilla.org/
+  content: >
+    This is news hot off the presses
+-
+  slug: general-update-beta
+  title: Example dev news update #2
+  created: 2017-06-01T12:00:00Z
+  published: 2017-06-01T12:00:00Z
+  dev: true
+  link: https://testpilot.firefox.com/
+  content: >
+    This is news hot off the presses again

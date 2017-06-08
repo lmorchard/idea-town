@@ -77,6 +77,10 @@ emailOptInConfirmationTitle = Email Sent
 emailOptInSuccessMessage2 = Thank you!
 emailOptInConfirmationClose = On to the experiments...
 
+// news feed updates.
+[[updateList]]
+latestUpdatesTitle = Latest Updates
+
 // A listing of all Test Pilot experiments.
 [[experimentsList]]
 experimentListEnabledTab = Enabled
