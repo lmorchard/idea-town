@@ -181,6 +181,8 @@ highlightPrivacy = Gizliliğiniz
 
 upgradeNoticeTitle = { $title } için Firefox { $min_release } veya üstü gerekir.
 upgradeNoticeLink = Firefox nasıl güncellenir?
+versionChangeNotice = { $experiment_title } Firefox'un bu sürümünde desteklenmiyor.
+versionChangeNoticeLink = Firefox'un son sürümünü indirin.
 
 
 // Shown while uninstalling Test Pilot.

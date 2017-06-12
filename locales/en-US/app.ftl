@@ -79,7 +79,7 @@ emailOptInConfirmationClose = On to the experiments...
 
 // news feed updates.
 [[updateList]]
-latestUpdatesTitle = Latest Updates
+latestUpdatesTitle = Latest updates
 
 // A listing of all Test Pilot experiments.
 [[experimentsList]]
@@ -88,7 +88,8 @@ experimentListJustLaunchedTab = Just Launched
 experimentListJustUpdatedTab = Just Updated
 experimentListEndingTomorrow = Ending Tomorrow
 experimentListEndingSoon = Ending Soon
-experimentsListCondensedHeader = Pick your experiments!
+experimentCondensedHeader = Welcome to Test Pilot!
+experimentListHeader = Pick your experiments!
 
 // An individual experiment in the listing of all Test Pilot experiments.
 [[experimentCard]]

@@ -1,11 +1,22 @@
+// @flow
+
 import classnames from 'classnames';
-import React, { PropTypes } from 'react';
+import React from 'react';
 
 import LayoutWrapper from './LayoutWrapper';
 import NewsletterForm from './NewsletterForm';
 
+type NewsletterFooterProps = {
+  getWindowLocation: Function,
+  newsletterForm: {
+    failed: boolean,
+    succeeded: boolean
+  }
+}
 
 export default class NewsletterFooter extends React.Component {
+  props: NewsletterFooterProps
+
   renderError() {
     if (this.props.newsletterForm.failed) {
       return (
@@ -22,7 +33,7 @@ export default class NewsletterFooter extends React.Component {
       <header className="success-header">
         <h2 data-l10n-id="newsletterFooterSuccessHeader">Thanks!</h2>
         <p data-l10n-id="newsletterFooterSuccessBody">
-          If you haven't previously confirmed a subscription to a Mozilla-related
+          If you haven&apos;t previously confirmed a subscription to a Mozilla-related
           newsletter you may have to do so. Please check your inbox or your spam
           filter for an email from us.
         </p>
@@ -40,7 +51,7 @@ export default class NewsletterFooter extends React.Component {
         <h2 data-l10n-id="newsletterFooterHeader">Stay Informed</h2>
         <p data-l10n-id="newsletterFooterBody">
           Find out about new experiments and see test results for experiments
-          you've tried.
+          you&apos;ve tried.
         </p>
       </header>
     );
@@ -66,7 +77,3 @@ export default class NewsletterFooter extends React.Component {
     );
   }
 }
-
-NewsletterFooter.propTypes = {
-  getWindowLocation: PropTypes.func.isRequired
-};

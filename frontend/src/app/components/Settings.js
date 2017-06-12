@@ -1,7 +1,22 @@
+// @flow
+
 import React from 'react';
 import classnames from 'classnames';
 
+type SettingsProps = {
+  hasAddon: any,
+  sendToGA: Function,
+  close: Function,
+  retire: Function,
+  toggleSettings: Function,
+  settingsClick: Function,
+  showSettingsMenu: Function,
+  showSettings?: Function
+}
+
 export default class Settings extends React.Component {
+  props: SettingsProps
+
   wiki() {
     this.props.sendToGA('event', {
       eventCategory: 'Menu Interactions',
@@ -29,7 +44,7 @@ export default class Settings extends React.Component {
     this.props.close();
   }
 
-  retire(evt) {
+  retire(evt: Object) {
     evt.preventDefault();
     this.props.sendToGA('event', {
       eventCategory: 'Menu Interactions',
@@ -48,7 +63,7 @@ export default class Settings extends React.Component {
     return this.props.showSettingsMenu();
   }
 
-  toggleSettings(evt) {
+  toggleSettings(evt: Object) {
     const { sendToGA, toggleSettings } = this.props;
     sendToGA('event', {
       eventCategory: 'Menu Interactions',
@@ -70,14 +85,21 @@ export default class Settings extends React.Component {
               {
                 this.showSettingsMenu()
                 &&
-                <div className="settings-menu" onClick={e => this.settingsClick(e)}>
+                <div className="settings-menu" onClick={() => this.settingsClick()}>
                   <ul>
-                    <li><a onClick={e => this.wiki(e)} data-l10n-id="menuWiki"
-                       href="https://wiki.mozilla.org/Test_Pilot" target="_blank">Test Pilot Wiki</a></li>
+                    <li>
+                      <a onClick={() => this.wiki()} data-l10n-id="menuWiki"
+                       href="https://wiki.mozilla.org/Test_Pilot"
+                       target="_blank" rel="noopener noreferrer">
+                       Test Pilot Wiki
+                      </a>
+                    </li>
                     <li><a onClick={() => this.discuss()} data-l10n-id="menuDiscuss"
-                       href="https://discourse.mozilla-community.org/c/test-pilot" target="_blank">Discuss Test Pilot</a></li>
-                    <li><a onClick={e => this.fileIssue(e)} data-l10n-id="menuFileIssue"
-                       href="https://github.com/mozilla/testpilot/issues/new" target="_blank">File an Issue</a></li>
+                       href="https://discourse.mozilla-community.org/c/test-pilot"
+                       target="_blank" rel="noopener noreferrer">Discuss Test Pilot</a></li>
+                    <li><a onClick={() => this.fileIssue()} data-l10n-id="menuFileIssue"
+                       href="https://github.com/mozilla/testpilot/issues/new"
+                       target="_blank" rel="noopener noreferrer">File an Issue</a></li>
                     <li><hr /></li>
                     <li><a onClick={e => this.retire(e)} data-l10n-id="menuRetire">Uninstall Test Pilot</a></li>
                   </ul>
@@ -95,23 +117,18 @@ export default class Settings extends React.Component {
   // cancel if the click was inside the menu. Sounds backwards, but it works.
 
   componentDidMount() {
-    document.body.addEventListener('click', this.props.close);
+    if (typeof document !== 'undefined'
+      && document.body !== null) {
+      document.body.addEventListener('click', this.props.close);
+    }
   }
 
   componentWillUnmount() {
     if (this.closeTimer) { clearTimeout(this.closeTimer); }
-    document.body.removeEventListener('click', this.props.close);
+    if (typeof document !== 'undefined'
+      && document.body !== null) {
+      document.body.removeEventListener('click', this.props.close);
+    }
   }
 
 }
-
-Settings.propTypes = {
-  hasAddon: React.PropTypes.any,
-  sendToGA: React.PropTypes.func,
-  close: React.PropTypes.func,
-  retire: React.PropTypes.func,
-  toggleSettings: React.PropTypes.func,
-  settingsClick: React.PropTypes.func,
-  showSettingsMenu: React.PropTypes.func,
-  showSettings: React.PropTypes.func
-};

@@ -1,9 +1,22 @@
+// @flow
+
 import React from 'react';
 
 import Copter from './Copter';
 import { buildSurveyURL } from '../lib/utils';
 
+type ExperimentDisableDialogProps = {
+  experiment: Object,
+  installed: Object,
+  clientUUID: string,
+  onCancel: Function,
+  onSubmit: Function,
+  sendToGA: Function
+}
+
 export default class ExperimentDisableDialog extends React.Component {
+  props: ExperimentDisableDialogProps
+
   render() {
     const { experiment, installed, clientUUID } = this.props;
     const { title, survey_url } = experiment;
@@ -29,14 +42,17 @@ export default class ExperimentDisableDialog extends React.Component {
           <div className="modal-actions">
             <a data-l10n-id="feedbackSubmitButton"
                onClick={e => this.submit(e)} href={surveyURL}
-               target="_blank" className="submit button default large quit">Take a quick survey</a>
+               target="_blank" rel="noopener noreferrer"
+               className="submit button default large quit">
+               Take a quick survey
+            </a>
           </div>
         </div>
       </div>
     );
   }
 
-  submit(e) {
+  submit(e: Object) {
     this.props.sendToGA('event', {
       eventCategory: 'ExperimentDetailsPage Interactions',
       eventAction: 'button click',
@@ -45,16 +61,8 @@ export default class ExperimentDisableDialog extends React.Component {
     this.props.onSubmit(e);
   }
 
-  cancel(e) {
+  cancel(e: Object) {
     e.preventDefault();
     this.props.onCancel(e);
   }
 }
-
-ExperimentDisableDialog.propTypes = {
-  experiment: React.PropTypes.object.isRequired,
-  installed: React.PropTypes.object.isRequired,
-  onCancel: React.PropTypes.func.isRequired,
-  onSubmit: React.PropTypes.func.isRequired,
-  sendToGA: React.PropTypes.func.isRequired
-};

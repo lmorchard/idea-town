@@ -1,12 +1,30 @@
+// @flow
+
 import React from 'react';
 
 import LayoutWrapper from './LayoutWrapper';
 import RetireConfirmationDialog from './RetireConfirmationDialog';
 import Settings from './Settings';
 
-export default class Header extends React.Component {
+type HeaderProps = {
+  uninstallAddon: Function,
+  sendToGA: Function,
+  openWindow: Function,
+  hasAddon: any,
+  forceHideSettings: boolean
+}
 
-  constructor(props) {
+type HeaderState = {
+  showRetireDialog: boolean,
+  showSettings: boolean
+}
+
+export default class Header extends React.Component {
+  props: HeaderProps
+  state: HeaderState
+  closeTimer: any
+
+  constructor(props: HeaderProps) {
     super(props);
 
     this.closeTimer = null;
@@ -84,9 +102,9 @@ export default class Header extends React.Component {
     );
   }
 
-  toggleSettings(evt) {
+  toggleSettings() {
     if (this.state.showSettings) {
-      this.close(evt);
+      this.close();
     } else {
       this.setState({ showSettings: true });
     }
@@ -96,11 +114,3 @@ export default class Header extends React.Component {
     this.setState({ showRetireDialog: true });
   }
 }
-
-Header.propTypes = {
-  uninstallAddon: React.PropTypes.func.isRequired,
-  sendToGA: React.PropTypes.func.isRequired,
-  openWindow: React.PropTypes.func.isRequired,
-  hasAddon: React.PropTypes.any,
-  forceHideSettings: React.PropTypes.bool
-};

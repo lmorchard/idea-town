@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import classnames from 'classnames';
 
@@ -6,9 +8,26 @@ import LayoutWrapper from '../components/LayoutWrapper';
 import View from '../components/View';
 
 
-export default class RetirePage extends React.Component {
+type RetirePageProps = {
+  setHasAddon: Function,
+  sendToGA: Function,
+  fakeUninstallDelay?: number
+}
 
-  constructor(props) {
+type RetirePageState = {
+  fakeUninstalled: boolean
+}
+
+export default class RetirePage extends React.Component {
+  props: RetirePageProps
+  state: RetirePageState
+  fakeUninstallTimer: any
+
+  static defaultProps = {
+    fakeUninstallDelay: 5000
+  };
+
+  constructor(props: RetirePageProps) {
     super(props);
     this.state = {
       fakeUninstalled: false
@@ -53,7 +72,7 @@ export default class RetirePage extends React.Component {
                 <p data-l10n-id="retirePageMessage">Hope you had fun experimenting with us. <br /> Come back any time.</p>
               </div>
               <div className="modal-actions">
-                <a onClick={() => this.takeSurvey()} data-l10n-id="retirePageSurveyButton" href="https://qsurvey.mozilla.com/s3/test-pilot" target="_blank" className="button default large">Take a quick survey</a>
+                <a onClick={() => this.takeSurvey()} data-l10n-id="retirePageSurveyButton" href="https://qsurvey.mozilla.com/s3/test-pilot" target="_blank" rel="noopener noreferrer" className="button default large">Take a quick survey</a>
                 <a href="/"  data-l10n-id="home" className="modal-escape">Home</a>
               </div>
             </div>
@@ -72,12 +91,3 @@ export default class RetirePage extends React.Component {
     });
   }
 }
-
-RetirePage.propTypes = {
-  setHasAddon: React.PropTypes.func,
-  fakeUninstallDelay: React.PropTypes.number
-};
-
-RetirePage.defaultProps = {
-  fakeUninstallDelay: 5000
-};

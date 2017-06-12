@@ -1,8 +1,15 @@
+// @flow
+
 import React from 'react';
 
 import LayoutWrapper from './LayoutWrapper';
 
+type FooterProps = {
+  sendToGA: Function
+}
+
 export default class Footer extends React.Component {
+  props: FooterProps
 
   render() {
     return (
@@ -18,16 +25,18 @@ export default class Footer extends React.Component {
           </div>
           <div className="social-links">
             <a onClick={(e) => this.eventToGA(e)} href="https://github.com/mozilla/testpilot"
-              target="_blank" className="link-icon github" title="GitHub"></a>
+              target="_blank" className="link-icon github"
+              rel="noopener noreferrer" title="GitHub"></a>
             <a onClick={(e) => this.eventToGA(e)} href="https://twitter.com/FxTestPilot"
-              target="_blank" className="link-icon twitter" title="Twitter"></a>
+              target="_blank" rel="noopener noreferrer"
+              className="link-icon twitter" title="Twitter"></a>
           </div>
         </LayoutWrapper>
       </footer>
     );
   }
 
-  eventToGA(e) {
+  eventToGA(e: Object) {
     const label = e.target.getAttribute('title');
     this.props.sendToGA('event', {
       eventCategory: 'FooterView Interactions',
@@ -37,7 +46,3 @@ export default class Footer extends React.Component {
   }
 
 }
-
-Footer.propTypes = {
-  sendToGA: React.PropTypes.func.isRequired
-};

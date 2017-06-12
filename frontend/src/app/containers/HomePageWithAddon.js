@@ -1,4 +1,7 @@
 /* eslint-disable */
+
+// @flow
+
 import React from 'react';
 import classnames from 'classnames';
 
@@ -13,9 +16,27 @@ import PastExperiments from '../components/PastExperiments';
 import View from '../components/View';
 
 
-export default class HomePageWithAddon extends React.Component {
+type HomePageWithAddonProps = {
+  hasAddon: any,
+  experiments: Array<Object>,
+  getCookie: Function,
+  removeCookie: Function,
+  getWindowLocation: Function,
+  uninstallAddon: Function,
+  sendToGA: Function,
+  openWindow: Function,
+  isAfterCompletedDate: Function
+}
 
-  constructor(props) {
+type HomePageWithAddonState = {
+  showEmailDialog: boolean
+}
+
+export default class HomePageWithAddon extends React.Component {
+  props: HomePageWithAddonProps
+  state: HomePageWithAddonState
+
+  constructor(props: HomePageWithAddonProps) {
     super(props);
     const { getCookie, removeCookie, getWindowLocation } = this.props;
 
@@ -70,10 +91,10 @@ export default class HomePageWithAddon extends React.Component {
     return (
       <Banner condensed={true}>
       <LayoutWrapper flexModifier="row-between-reverse">
-        <h2 className="banner__title" data-l10n-id="experimentsListCondensedHeader">
-            Pick your experiments!
+        <h2 className="banner__title" data-l10n-id="experimentCondensedHeader">
+          Welcome to Test Pilot!
         </h2>
-        <Copter small="true" />
+        <Copter small={true} />
       </LayoutWrapper>
       </Banner>
     );
@@ -98,6 +119,7 @@ export default class HomePageWithAddon extends React.Component {
 
         <LayoutWrapper flexModifier="card-list">
           <UpdateList {...{ newsUpdates, experiments }} />
+          <h1 className="emphasis card-list-heading" data-l10n-id="experimentListHeader">Pick your experiments!</h1>
           <ExperimentCardList {...this.props} experiments={currentExperiments} eventCategory="HomePage Interactions" />
           <PastExperiments {...this.props} pastExperiments={ pastExperiments } />
         </LayoutWrapper>
@@ -105,14 +127,3 @@ export default class HomePageWithAddon extends React.Component {
     );
   }
 }
-
-HomePageWithAddon.propTypes = {
-  hasAddon: React.PropTypes.any,
-  getCookie: React.PropTypes.func,
-  removeCookie: React.PropTypes.func,
-  getWindowLocation: React.PropTypes.func,
-  uninstallAddon: React.PropTypes.func,
-  sendToGA: React.PropTypes.func,
-  openWindow: React.PropTypes.func,
-  isAfterCompletedDate: React.PropTypes.func
-};
