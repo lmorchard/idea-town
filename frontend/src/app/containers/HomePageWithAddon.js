@@ -91,8 +91,8 @@ export default class HomePageWithAddon extends React.Component {
     return (
       <Banner condensed={true}>
       <LayoutWrapper flexModifier="row-between-reverse">
-        <h2 className="banner__title" data-l10n-id="experimentsListCondensedHeader">
-            Pick your experiments!
+        <h2 className="banner__title" data-l10n-id="experimentCondensedHeader">
+          Welcome to Test Pilot!
         </h2>
         <Copter small={true} />
       </LayoutWrapper>
@@ -119,6 +119,7 @@ export default class HomePageWithAddon extends React.Component {
 
         <LayoutWrapper flexModifier="card-list">
           <UpdateList {...{ newsUpdates, experiments }} />
+          <h1 className="emphasis card-list-heading" data-l10n-id="experimentListHeader">Pick your experiments!</h1>
           <ExperimentCardList {...this.props} experiments={currentExperiments} eventCategory="HomePage Interactions" />
           <PastExperiments {...this.props} pastExperiments={ pastExperiments } />
         </LayoutWrapper>

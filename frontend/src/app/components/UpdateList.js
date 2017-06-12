@@ -23,7 +23,10 @@ export class Update extends React.Component {
         <a className={classnames('update', { 'has-link': !!link })} href={link}>
           <div className={classnames(iconClassName, 'experiment-icon')}></div>
           <div className="update-content">
-            <h2 data-l10n-id={categoryTitleL10nID}>{categoryTitle}</h2> <p className="up-date">{prettyDate(published || created)}</p>
+            <header>
+              <h2 data-l10n-id={categoryTitleL10nID}>{categoryTitle}</h2>
+              <p className="up-date">{prettyDate(published || created)}</p>
+            </header>
             <h4 data-l10n-id={newsUpdateL10nId(update, 'title')}>{title}</h4>
             <p data-l10n-id={newsUpdateL10nId(update, 'content')} className="summary">{content}</p>
           </div>
