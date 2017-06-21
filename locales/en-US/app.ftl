@@ -1,3 +1,4 @@
+// Fake comment to be deleted
 siteName = Firefox Test Pilot
 
 // Page titles, put in the <title> HTML tag.
