@@ -4,6 +4,8 @@ import ReactDOMFactories from 'react/lib/ReactDOMFactories';
 import Symbol from 'es-symbol';
 import { Localized } from 'fluent-react/compat';
 
+import config from '../../config';
+
 import Copter from '../components/Copter';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -144,7 +146,7 @@ export default class View extends React.Component {
           for details.
         </p>
       </LocalizedHtml>;
-    } else if (['example.com:8000', 'testpilot.dev.mozaws.net', 'testpilot.stage.mozaws.net'].includes(window.location.host)) {
+    } else if (config.devHosts.includes(window.location.host)) {
       title = <Localized id="warningMissingPrefTitle">
         <span>Developing Test Pilot?</span>
       </Localized>;
@@ -157,7 +159,7 @@ export default class View extends React.Component {
           for details.
         </p>
       </LocalizedHtml>;
-    } else if (window.location.host !== 'testpilot.firefox.com') {
+    } else if (window.location.host !== config.prodHost) {
       title = <Localized id="warningBadHostnameTitle">
         <span>Unapproved hostname!</span>
       </Localized>;
