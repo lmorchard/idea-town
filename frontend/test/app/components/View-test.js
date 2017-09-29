@@ -1,4 +1,5 @@
 import React from 'react';
+import createClass from 'create-react-class';
 import { assert, expect } from 'chai';
 import sinon from 'sinon';
 import { shallow, mount, render } from 'enzyme';
@@ -7,7 +8,7 @@ import { defaultState } from '../../../src/app/reducers/newsletter-form';
 import View from '../../../src/app/components/View';
 import appConfig from '../../../src/app/config';
 
-const FooComponent = React.createClass({
+const FooComponent = createClass({
   render: function(){
     return <p>{this.props.foo}</p>;
   }

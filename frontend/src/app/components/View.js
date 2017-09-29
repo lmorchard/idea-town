@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
-import ReactDOMFactories from 'react/lib/ReactDOMFactories';
+import ReactDOMFactories from 'react-dom-factories';
 import Symbol from 'es-symbol';
 import { Localized } from 'fluent-react/compat';
 

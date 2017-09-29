@@ -18,7 +18,9 @@ const excludeVendorModules = [
   'fluent',
   'fluent-langneg',
   'fluent-react',
-  'cldr-core'
+  'cldr-core',
+  'react',
+  'react-dom'
 ];
 
 const includeVendorModules = [
@@ -28,9 +30,19 @@ const includeVendorModules = [
   'fluent-react/compat',
   'cldr-core/supplemental/likelySubtags.json',
   'html-react-parser/lib/dom-to-react',
-  'react/lib/ReactDOMFactories',
   'querystring'
-];
+].concat(
+  IS_DEV
+    ? [
+      'react/umd/react.development.js',
+      'react-dom/umd/react-dom.development.js'
+    ]
+    : [
+      'react/umd/react.production.min.js',
+      'react-dom/umd/react-dom.production.min.js'
+    ]
+);
+
 
 const vendorModules = Object.keys(packageJSON.dependencies)
   .filter(name => excludeVendorModules.indexOf(name) < 0)

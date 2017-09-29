@@ -1,4 +1,8 @@
 // Global setup for all tests
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 // HACK: Ignore non-JS imports used for asset dependencies in Webpack
 require.extensions['.scss'] = function () {}
