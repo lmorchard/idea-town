@@ -1,4 +1,3 @@
-import 'regenerator-runtime/runtime';
 import Raven from 'raven-js';
 import moment from 'moment';
 
