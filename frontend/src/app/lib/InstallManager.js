@@ -86,44 +86,58 @@ export function setupAddonConnection(store) {
   }
 
   mam.addEventListener('onEnabled', addon => {
-    if (addon) {
-      const { experiments } = store.getState();
-      const i = experiments.data.map(x => x.addon_id).indexOf(addon.id);
-      if (i > -1) {
-        const x = experiments.data[i];
-        store.dispatch(addonActions.enableExperiment(x));
-        store.dispatch(
-          updateExperiment(x.addon_id, {
-            inProgress: false,
-            error: false
-          })
-        );
-      }
+    if (!addon) { return false; }
+    if (addon.id === TESTPILOT_ADDON_ID) {
+      return store.dispatch(addonActions.setHasAddon(true));
     }
+    const { experiments } = store.getState();
+    const i = experiments.data.map(x => x.addon_id).indexOf(addon.id);
+    if (i > -1) {
+      const x = experiments.data[i];
+      store.dispatch(addonActions.enableExperiment(x));
+      store.dispatch(
+        updateExperiment(x.addon_id, {
+          inProgress: false,
+          error: false
+        })
+      );
+    }
+    return true;
   });
+
+  mam.addEventListener('onInstalled', addon => {
+    if (addon && addon.id === TESTPILOT_ADDON_ID) {
+      return store.dispatch(addonActions.setHasAddon(true));
+    }
+    installHistory.setActive(addon.id);
+    return true;
+  });
+
   function onDisabled(addon) {
-    if (addon) {
-      const { experiments } = store.getState();
-      const i = experiments.data.map(x => x.addon_id).indexOf(addon.id);
-      if (i > -1) {
-        const x = experiments.data[i];
-        store.dispatch(addonActions.disableExperiment(x));
-        store.dispatch(
-          updateExperiment(x.addon_id, {
-            inProgress: false,
-            error: false
-          })
-        );
-      }
+    if (!addon) { return false; }
+    if (addon.id === TESTPILOT_ADDON_ID) {
+      return store.dispatch(addonActions.setHasAddon(false));
+    }
+    const { experiments } = store.getState();
+    const i = experiments.data.map(x => x.addon_id).indexOf(addon.id);
+    if (i > -1) {
+      const x = experiments.data[i];
+      store.dispatch(addonActions.disableExperiment(x));
+      store.dispatch(
+        updateExperiment(x.addon_id, {
+          inProgress: false,
+          error: false
+        })
+      );
 
       installHistory.setInactive(addon.id);
     }
+    return true;
   }
+
   mam.addEventListener('onDisabled', onDisabled);
   mam.addEventListener('onUninstalled', onDisabled);
-  mam.addEventListener('onInstalled', addon =>
-    installHistory.setActive(addon.id)
-  );
+
   /*
   mam.addEventListener('onEnabling', (addon, restart) => {
   });
